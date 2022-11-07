@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SizeConfig {
+  BuildContext ctx;
+  SizeConfig(ctx) {
+    this.ctx = ctx;
+    init(ctx);
+  }
   static MediaQueryData _mediaQueryData;
   static double screenWidth;
   static double screenHeight;
@@ -15,11 +20,12 @@ class SizeConfig {
   }
 
   get getWidth {
-    if (orientation.name == "portrait") {
-      return screenWidth;
-    } else {
-      return screenWidth / 1.5;
-    }
+    // if (orientation.name == "portrait") {
+    //   return screenWidth;
+    // } else {
+    //   return screenWidth / 1.5;
+    // }
+    return screenWidth;
   }
 
   get getHeight {

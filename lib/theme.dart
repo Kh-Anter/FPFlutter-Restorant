@@ -30,7 +30,9 @@ TextTheme textTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
+    centerTitle: true,
     color: Colors.white,
+    textTheme: textTheme(),
     titleTextStyle: TextStyle(
         color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold),
     elevation: 0,
