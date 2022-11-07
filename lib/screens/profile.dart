@@ -144,6 +144,19 @@ class profile extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange,
+                    borderRadius: BorderRadius.circular(30)
+                ),
+                child: Center(child: Text('Update',style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold,letterSpacing: 2),)),
+              ),
+            )
+
           ],
         ),
       ),
