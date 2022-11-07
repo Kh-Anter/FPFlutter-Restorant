@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemBuilder: (context, index) =>Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    width: 300,
+                                    width: 250,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                       borderRadius: BorderRadius.circular(20),
@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemBuilder: (context, index) =>Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    width: 300,
+                                    width: 250,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20),
