@@ -5,8 +5,7 @@ import 'package:restorant/widgets/Auth/login.dart';
 import 'package:restorant/widgets/Auth/signup.dart';
 
 class Authentication extends StatefulWidget {
-  Authentication({Key key}) : super(key: key);
-
+  static const routeName = "/Authentication";
   @override
   State<Authentication> createState() => _AuthenticationState();
 }
@@ -24,38 +23,34 @@ class _AuthenticationState extends State<Authentication> {
       child: Scaffold(
         backgroundColor: myBackgroundColor,
         appBar: AppBar(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(40))),
-          flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-            alignment: Alignment.center,
-            child: Image.asset(
-              "assets/images/auth/cap.png",
-            ),
-          )),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(tapbar_height - 34),
-            child: Builder(builder: (context) {
-              return Container(
-                width: _size.getWidth - 80,
-                child: const TabBar(
-                  tabs: [
-                    Padding(
-                      padding: EdgeInsets.all(7),
-                      child: Text("Login",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(7),
-                      child: Text("Sign-up",
-                          style: TextStyle(color: Colors.black, fontSize: 20)),
-                    ),
-                  ],
-                ),
-              );
-            }),
-          ),
-        ),
+            shape: const RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(40))),
+            flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+              alignment: Alignment.center,
+              child: Image.asset(
+                "assets/images/auth/cap.png",
+              ),
+            )),
+            bottom: PreferredSize(
+                preferredSize: Size.fromHeight(tapbar_height - 34),
+                child: Builder(builder: (context) {
+                  return Container(
+                      width: _size.getWidth - 80,
+                      child: const TabBar(tabs: [
+                        Padding(
+                            padding: EdgeInsets.all(7),
+                            child: Text("Login",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20))),
+                        Padding(
+                            padding: EdgeInsets.all(7),
+                            child: Text("Sign-up",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20))),
+                      ]));
+                }))),
         body: Container(
           margin: const EdgeInsets.only(top: 20),
           height: _size.getHeight,

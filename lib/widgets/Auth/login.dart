@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restorant/getx/auth.dart';
 
 class Login extends StatefulWidget {
   double width;
@@ -64,32 +66,61 @@ class _LoginState extends State<Login> {
                   child: TextButton(
                       onPressed: () {}, child: Text("Forget password ?")))
             ]),
+            SizedBox(height: 50),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      height: 40,
+                      child: IconButton(
+                          onPressed: (() => Auth().signInWithGoogle(context)),
+                          icon: Icon(FontAwesomeIcons.google, size: 32),
+                          alignment: Alignment.bottomLeft)),
+                  SizedBox(width: 10),
+                  IconButton(
+                      onPressed: (() {
+                        Auth().signInWithFacebook(context);
+                      }),
+                      icon: Icon(Icons.facebook_sharp, size: 40)),
+                ]),
             SizedBox(
-              height: widget.height - 300,
+              height: widget.height - 400,
             ),
             Container(
-                margin: EdgeInsets.only(bottom: 20),
-                width: widget.width - 70,
-                height: 50,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)))),
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        setState(() {
-                          loading = true;
-                        });
-                      }
-                    },
-                    child: loading
-                        ? CircularProgressIndicator(
-                            color: Colors.white,
-                          )
-                        : Text(
-                            "Login",
-                            style: TextStyle(fontSize: 18),
-                          )))
+              margin: EdgeInsets.only(bottom: 20),
+              width: widget.width - 70,
+              height: 50,
+              child: StatefulBuilder(
+                builder: (BuildContext context, setState) {
+                  return ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)))),
+                      onPressed: () async {
+                        if (formKey.currentState.validate()) {
+                          setState(() {
+                            loading = true;
+                          });
+                          await Auth().signin(email_ctl.text.toString(),
+                              pass_ctl.text.toString(), context);
+                          setState(() {
+                            loading = false;
+                          });
+                        }
+                      },
+                      child: loading
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Login",
+                              style: TextStyle(fontSize: 18),
+                            ));
+                },
+              ),
+            )
           ],
         ),
       ),

@@ -7,7 +7,7 @@ import 'package:restorant/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({Key key}) : super(key: key);
+  static const routeName = "/Authentication";
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restorant/getx/auth.dart';
 
 class Signup extends StatefulWidget {
   double width;
@@ -10,8 +11,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  bool isHidden = false;
-  bool isHidden2 = false;
+  bool isHidden = true;
+  bool isHidden2 = true;
   bool loading = false;
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
@@ -88,28 +89,40 @@ class _SignupState extends State<Signup> {
                                   isHidden2 = !isHidden2;
                                 });
                               })))),
-              SizedBox(height: 65),
+              const SizedBox(height: 65),
               Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  width: widget.width - 70,
-                  height: 50,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)))),
-                      onPressed: () {
-                        if (formKey.currentState.validate()) {
-                          setState(() {
-                            loading = true;
-                          });
-                        }
-                      },
-                      child: loading
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text("Signup", style: TextStyle(fontSize: 18))))
+                margin: const EdgeInsets.only(bottom: 20),
+                width: widget.width - 70,
+                height: 50,
+                child: StatefulBuilder(
+                  builder: (BuildContext context, setState) {
+                    return ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30)))),
+                        onPressed: () async {
+                          if (formKey.currentState.validate()) {
+                            setState(() {
+                              loading = true;
+                            });
+                            await Auth().Signup(email.text.toString(),
+                                pass.text.toString(), name, context);
+
+                            setState(() {
+                              loading = false;
+                            });
+                          }
+                        },
+                        child: loading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text("Signup",
+                                style: TextStyle(fontSize: 18)));
+                  },
+                ),
+              )
             ])));
   }
 }
