@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
+import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/cart.dart';
 import 'package:restorant/screens/profile.dart';
 import 'package:restorant/screens/see_all.dart';
@@ -11,6 +12,7 @@ import 'package:restorant/widgets/Home/home_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/Home";
+  maincontroller favcontroller = Get.put(maincontroller());
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final FeatchController controller = Get.put(FeatchController());
   final HomeController home_ctl = Get.put(HomeController());
+  String searchLabel = "Search";
 
   @override
   Widget build(BuildContext context) {
