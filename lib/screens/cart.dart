@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restorant/controller/maincontroller.dart';
+import 'package:restorant/screens/checkout.dart';
 import 'package:restorant/screens/home.dart';
 
 class CartPage extends StatelessWidget {
   static const routeName = "/Cart";
-  maincontroller favcontroller = Get.put(maincontroller());
+  maincontroller cardcontroller = Get.put(maincontroller());
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<maincontroller>(
-        init: favcontroller,
+        init: cardcontroller,
         initState: (_) {},
-        builder: (favcontroller) {
-          favcontroller.getfavitem();
+        builder: (cardcontroller) {
+          cardcontroller.getcarditem();
           return Scaffold(
             backgroundColor: Colors.white70,
             appBar: AppBar(
@@ -27,7 +28,7 @@ class CartPage extends StatelessWidget {
                   onPressed: () => Get.off(HomeScreen()),
                   icon: Icon(Icons.arrow_back_ios)),
             ),
-            body:favcontroller.isload?Center(child: CircularProgressIndicator()):
+            body:cardcontroller.isload?Center(child: CircularProgressIndicator()):
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -48,7 +49,7 @@ class CartPage extends StatelessWidget {
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) => Dismissible(
                         onDismissed: (index){
-                            favcontroller.deletefavitem('222');
+                          cardcontroller.deletecarditem('3333');
                         },
                         key: Key('item ${index}'),
                         background: Container(child: Icon(Icons.delete)),
@@ -78,7 +79,7 @@ class CartPage extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          favcontroller.favoritelist[index].name,
+                                          cardcontroller.cardlist[index].name,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16),
@@ -87,7 +88,7 @@ class CartPage extends StatelessWidget {
                                           height: 10,
                                         ),
                                         Text(
-                                          favcontroller.favoritelist[index].price,
+                                          cardcontroller.cardlist[index].price,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
@@ -143,9 +144,32 @@ class CartPage extends StatelessWidget {
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
                       ),
-                      itemCount: favcontroller.favoritelist.length,
+                      itemCount: cardcontroller.cardlist.length,
                     ),
-                  )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text('Total',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text('${cardcontroller.totalcardprice}',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
+
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: (){
+                      Get.off(checkout());
+                    },
+                    child: Container(
+                      height: 50,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          color: Colors.deepOrange
+                        ),
+                        child: Center(child: Text('Press To Complete',style: TextStyle(color: Colors.white,
+                        fontWeight: FontWeight.bold,fontSize: 20
+                        ),))),
+                  ),
                 ],
               ),
             ),
