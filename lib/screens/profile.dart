@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
+import 'package:restorant/controller/maincontroller.dart';
+import 'package:restorant/model/user_model.dart';
 import 'package:restorant/screens/home.dart';
 
 class profile extends StatelessWidget {
   static const routeName = "/Profile";
+  maincontroller mcontroller = Get.put(maincontroller());
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<maincontroller>(
+        init: mcontroller,
+        initState: (_) {},
+    builder: (mcontroller) {
+          mcontroller.getUserData();
+          var user=mcontroller.userDataModel;
+          return Scaffold(
       backgroundColor: Colors.white70,
       appBar: AppBar(
         backgroundColor: Colors.white70,
@@ -70,14 +80,17 @@ class profile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Ahmed Khalaf',
+                          '${user.firstName} ${user.lastName}',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          'AhmedKhalaf@gmail.com',
-                          style:
-                              TextStyle(fontSize: 18, color: Colors.grey[700]),
+                        Container(
+                          width: 240,
+                          child: Text(
+                            '${user.email}',
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.grey[700],fontWeight: FontWeight.bold),
+                          ),
                         ),
                         SizedBox(
                           height: 10,
@@ -93,7 +106,7 @@ class profile extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                '01141980547',
+                                '${user.mobileNumber}',
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.grey[700]),
                               ),
@@ -239,5 +252,6 @@ class profile extends StatelessWidget {
         ),
       ),
     );
+    });
   }
 }
