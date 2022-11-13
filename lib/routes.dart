@@ -5,6 +5,7 @@ import 'package:restorant/screens/cart.dart';
 import 'package:restorant/screens/home.dart';
 import 'package:restorant/screens/onboarding_Screen.dart';
 import 'package:restorant/screens/profile.dart';
+import 'package:restorant/screens/see_all.dart';
 
 final List<GetPage<dynamic>> routes = [
   GetPage(name: Authentication.routeName, page: () => Authentication()),
@@ -12,4 +13,5 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: OnboardingScreen.routeName, page: () => OnboardingScreen()),
   GetPage(name: CartPage.routeName, page: () => CartPage()),
   GetPage(name: profile.routeName, page: () => profile()),
+  GetPage(name: SeeAll.routeName, page: () => SeeAll()),
 ];

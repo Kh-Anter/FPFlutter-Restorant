@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () => Get.off(HomeScreen()),
+            onPressed: () => Get.off(() => HomeScreen()),
             icon: Icon(Icons.arrow_back_ios)),
       ),
       body: Padding(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -8,14 +9,17 @@ import 'package:restorant/screens/home.dart';
 import 'package:restorant/widgets/Auth/signup.dart';
 
 class Auth {
-  Signup(email, pass, fullname, ctx) async {
+  Signup(email, pass, fname, lname, ctx) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: pass,
       );
-      FirebaseAuth.instance.currentUser.updateDisplayName(fullname);
+      var user = FirebaseAuth.instance.currentUser;
+      print("--------- current user : $user");
+      user.updateDisplayName(fname);
+      await addUserToFirestore(user.uid, fname, lname, email, "");
       Get.off(HomeScreen());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -54,6 +58,9 @@ class Auth {
       final _credential = GoogleAuthProvider.credential(
           idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
       await auth.signInWithCredential(_credential);
+      var user = auth.currentUser;
+      await addUserToFirestore(
+          user.uid, user.displayName, "", user.email, user.phoneNumber);
       Get.off(HomeScreen());
     } catch (e) {
       print("errrrrrrrrrorrrr ---------------------");
@@ -69,10 +76,27 @@ class Auth {
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken.token);
       await auth.signInWithCredential(facebookAuthCredential);
+      var user = auth.currentUser;
+      await addUserToFirestore(
+          user.uid, user.displayName, "", user.email, user.phoneNumber);
       Get.off(HomeScreen());
     } catch (e) {
       mySnackBar(context, e.code.toString());
     }
+  }
+
+  Future<void> addUserToFirestore(uid, fname, lname, email, mobNumber) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users.doc(uid).set({
+      'address': [],
+      'cart': [],
+      'fav': [],
+      'firstName': fname,
+      'lastName': lname,
+      'email': email,
+      'mobileNumber': mobNumber,
+      'role': 0,
+    }).then((value) => print("----------User Added------------"));
   }
 
   mySnackBar(BuildContext ctx, String text) {

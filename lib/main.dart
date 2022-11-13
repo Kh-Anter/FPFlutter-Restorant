@@ -25,20 +25,20 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Foodie',
       theme: theme(),
-      home: HomeScreen(),
-      // FutureBuilder(
-      //     future: isFirstUse(),
-      //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.waiting) {
-      //         return loading();
-      //       } else if (snapshot.data) {
-      //         return OnboardingScreen();
-      //       } else if (!snapshot.data) {
-      //         return Authentication();
-      //       } else {
-      //         return null;
-      //       }
-      //     }),
+      home: //HomeScreen(),
+          FutureBuilder(
+              future: isFirstUse(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return loading();
+                } else if (snapshot.data) {
+                  return OnboardingScreen();
+                } else if (!snapshot.data) {
+                  return Authentication();
+                } else {
+                  return null;
+                }
+              }),
       getPages: routes,
     );
   }
@@ -54,6 +54,6 @@ class MyApp extends StatelessWidget {
   }
 
   Widget loading() {
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }

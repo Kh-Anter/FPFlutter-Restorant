@@ -15,7 +15,8 @@ class _SignupState extends State<Signup> {
   bool isHidden2 = true;
   bool loading = false;
   final formKey = GlobalKey<FormState>();
-  final name = TextEditingController();
+  final fname = TextEditingController();
+  final lname = TextEditingController();
   final email = TextEditingController();
   final pass = TextEditingController();
   final repass = TextEditingController();
@@ -31,8 +32,18 @@ class _SignupState extends State<Signup> {
               Container(
                   width: widget.width - 70,
                   child: TextFormField(
-                      decoration: InputDecoration(labelText: "Full name"),
-                      controller: name,
+                      decoration: InputDecoration(labelText: "First name"),
+                      controller: fname,
+                      validator: (value) {
+                        if (value.isEmpty ||
+                            !RegExp("[a-zA-Z]{3,30}").hasMatch(value))
+                          return "Enter correct name!";
+                      })),
+              Container(
+                  width: widget.width - 70,
+                  child: TextFormField(
+                      decoration: InputDecoration(labelText: "Last name"),
+                      controller: lname,
                       validator: (value) {
                         if (value.isEmpty ||
                             !RegExp("[a-zA-Z]{3,30}").hasMatch(value))
@@ -89,7 +100,7 @@ class _SignupState extends State<Signup> {
                                   isHidden2 = !isHidden2;
                                 });
                               })))),
-              const SizedBox(height: 65),
+              const SizedBox(height: 15),
               Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 width: widget.width - 70,
@@ -106,8 +117,12 @@ class _SignupState extends State<Signup> {
                             setState(() {
                               loading = true;
                             });
-                            await Auth().Signup(email.text.toString(),
-                                pass.text.toString(), name, context);
+                            await Auth().Signup(
+                                email.text.toString(),
+                                pass.text.toString(),
+                                fname.text.toString(),
+                                lname.text.toString(),
+                                context);
 
                             setState(() {
                               loading = false;
