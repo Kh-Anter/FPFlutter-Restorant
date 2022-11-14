@@ -4,6 +4,7 @@ import 'package:restorant/constants.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
 import 'package:restorant/controller/maincontroller.dart';
+import 'package:restorant/screens/Favorite.dart';
 import 'package:restorant/screens/cart.dart';
 import 'package:restorant/screens/profile.dart';
 import 'package:restorant/screens/see_all.dart';
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: IconButton(
-                    onPressed: () => Get.to(CartPage()),
+                    onPressed: () => Get.to(() => CartPage()),
                     icon: const Icon(Icons.shopping_cart),
                     color: mySecondTextColor))
           ],
@@ -181,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         break;
       case 1:
         {
-          return Center(child: Text("Favorite"));
+          return FavoritePage();
         }
         break;
       case 2:

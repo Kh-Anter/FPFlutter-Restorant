@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restorant/screens/Favorite.dart';
 import 'package:restorant/screens/authentication.dart';
 import 'package:restorant/screens/cart.dart';
 import 'package:restorant/screens/checkout.dart';
@@ -16,4 +17,6 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: profile.routeName, page: () => profile()),
   GetPage(name: SeeAll.routeName, page: () => SeeAll()),
   GetPage(name: checkout.routeName, page: () => checkout()),
+  GetPage(name: FavoritePage.routeName, page: () => FavoritePage()),
+
 ];

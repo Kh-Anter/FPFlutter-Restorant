@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
+import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
 import 'package:restorant/screens/see_all.dart';
@@ -9,6 +10,8 @@ import 'package:restorant/size_config.dart';
 class HomeWidget extends StatelessWidget {
   final FeatchController controller = Get.put(FeatchController());
   final HomeController home_ctl = Get.put(HomeController());
+  final maincontroller main = Get.put(maincontroller());
+
   String searchLabel = "Search";
 
   var currentCategory = 0;
@@ -181,7 +184,7 @@ class HomeWidget extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(height: 30),
+                        SizedBox(height: 50),
                         Text(
                           items[index]["name"],
                           style: TextStyle(
@@ -197,6 +200,25 @@ class HomeWidget extends StatelessWidget {
                                   color: myPrimaryColor,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(onPressed: (){
+                              main.setfavitem(items[index]['name'],items[index]['price'].toString(),
+                                items[index]['description'],items[index]['pic'],
+                              );
+                            }, icon: Icon(Icons.favorite,color: Colors.grey,)),
+
+                            IconButton(onPressed: (){
+                              main.setcarditem(items[index]['name'],items[index]['price'].toString(),
+                                items[index]['description'],items[index]['pic'],
+                              );
+                            }, icon: Icon(Icons.add_shopping_cart))
+                          ],
                         )
                       ]),
                   width: 200,

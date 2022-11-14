@@ -4,9 +4,17 @@ import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/checkout.dart';
 import 'package:restorant/screens/home.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   static const routeName = "/Cart";
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   maincontroller cardcontroller = Get.put(maincontroller());
+
+  int num=1;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +57,8 @@ class CartPage extends StatelessWidget {
                           child: ListView.separated(
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) => Dismissible(
-                              onDismissed: (index) {
-                                cardcontroller.deletecarditem('3333');
+                              onDismissed: (ind) {
+                                cardcontroller.deletecarditem(cardcontroller.cardlist[index].itemid);
                               },
                               key: Key('item ${index}'),
                               background: Container(child: Icon(Icons.delete)),
@@ -81,8 +89,7 @@ class CartPage extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                cardcontroller
-                                                    .cardlist[index].name,
+                                                cardcontroller.cardlist[index].name,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16),
@@ -113,10 +120,18 @@ class CartPage extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Icon(
-                                                    Icons.remove,
-                                                    color: Colors.white,
-                                                    size: 15,
+                                                  GestureDetector(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        num++;
+                                                        cardcontroller.increase(cardcontroller.cardlist[index].price);
+                                                      });
+                                                    },
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     width: 10,
@@ -130,10 +145,18 @@ class CartPage extends StatelessWidget {
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Icon(
-                                                    Icons.add,
-                                                    color: Colors.white,
-                                                    size: 15,
+                                                  GestureDetector(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        num++;
+                                                        cardcontroller.increase(cardcontroller.cardlist[index].price);
+                                                      });
+                                                    },
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      color: Colors.white,
+                                                      size: 15,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
