@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         break;
       case 2:
         {
-          return Center(child: Text("Profile"));
+          return profile();
         }
         break;
       case 3:
