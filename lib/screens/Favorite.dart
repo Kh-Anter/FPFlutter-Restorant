@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/controller/maincontroller.dart';
+import 'package:restorant/screens/item_details.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key key}) : super(key: key);
@@ -35,80 +36,91 @@ class _FavoritePageState extends State<FavoritePage> {
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2
-                            )
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.start,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 40,
-                                      backgroundImage: AssetImage(
-                                          'assets/images/home/meal.jpg'),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          favcontroller.favoritelist[index].name,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          favcontroller
-                                              .favoritelist[index].price,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                              color: Colors.orange),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Container(
-                                          width: 200,
-                                          child: Text(
-                                            favcontroller.favoritelist[index].description,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  itemDetails(favcontroller.favoritelist[index].name,
+                              favcontroller.favoritelist[index].price,favcontroller.favoritelist[index].description,favcontroller.favoritelist[index].pic,
+                            ),)
+                            );
+
+                          },
+                          child: Container(
+                            width: double.maxFinite,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2
+                              )
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.start,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage: AssetImage(
+                                            'assets/images/home/meal.jpg'),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            favcontroller.favoritelist[index].name,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            softWrap: false,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    IconButton(onPressed: (){
-                                      setState(() {
-                                        favcontroller.deletefavitem(favcontroller.favoritelist[index].itemid,);
-                                        favcontroller.getfavitem();
-                                      });
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            favcontroller
+                                                .favoritelist[index].price,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                                color: Colors.orange),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            width: 200,
+                                            child: Text(
+                                              favcontroller.favoritelist[index].description,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              softWrap: false,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      IconButton(onPressed: (){
+                                        setState(() {
+                                          favcontroller.deletefavitem(favcontroller.favoritelist[index].itemid,);
+                                          favcontroller.getfavitem();
+                                        });
 
-                                    }, icon: Icon(Icons.delete)),
-                                  ],
-                                )
-                              ],
+                                      }, icon: Icon(Icons.delete)),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

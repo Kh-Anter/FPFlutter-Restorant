@@ -18,7 +18,7 @@ class maincontroller extends GetxController{
       QuerySnapshot items= await FirebaseFirestore.instance.collection('users').doc(UID).collection('favorite').get();
       favoritelist.clear();
       for(var item in items.docs){
-        favoritelist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description']));
+        favoritelist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description'],item['pic']));
       }
       isload=false;
     } catch(e){
@@ -57,7 +57,7 @@ class maincontroller extends GetxController{
       cardlist.clear();
       totalcardprice=0;
       for(var item in items.docs){
-        cardlist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description']));
+        cardlist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description'],item['pic']));
         totalcardprice=totalcardprice+double.parse(item['price']);
       }
       isload=false;
