@@ -5,7 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:restorant/screens/authentication.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/widgets/Auth/signup.dart';
 
 class Auth {
@@ -20,7 +20,7 @@ class Auth {
       print("--------- current user : $user");
       user.updateDisplayName(fname);
       await addUserToFirestore(user.uid, fname, lname, email, "");
-      Get.off(HomeScreen());
+      Get.offAllNamed(HomeScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         mySnackBar(ctx, 'The password provided is too weak.');
@@ -36,7 +36,7 @@ class Auth {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
-      Get.off(HomeScreen());
+      Get.offAllNamed(HomeScreen.routeName);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         mySnackBar(ctx, "No user found for that email.");
@@ -61,7 +61,7 @@ class Auth {
       var user = auth.currentUser;
       await addUserToFirestore(
           user.uid, user.displayName, "", user.email, user.phoneNumber);
-      Get.off(HomeScreen());
+      Get.offAllNamed(HomeScreen.routeName);
     } catch (e) {
       print("errrrrrrrrrorrrr ---------------------");
       print(e);
@@ -79,7 +79,7 @@ class Auth {
       var user = auth.currentUser;
       await addUserToFirestore(
           user.uid, user.displayName, "", user.email, user.phoneNumber);
-      Get.off(HomeScreen());
+      Get.offAllNamed(HomeScreen.routeName);
     } catch (e) {
       mySnackBar(context, e.code.toString());
     }

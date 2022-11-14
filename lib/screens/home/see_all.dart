@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/getx/auth.dart';
 import 'package:restorant/getx/featchData.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/size_config.dart';
 
 class SeeAll extends StatelessWidget {
@@ -48,7 +48,7 @@ class SeeAll extends StatelessWidget {
           ),
           centerTitle: true,
           leading: IconButton(
-              onPressed: () => Get.off(() => HomeScreen()),
+              onPressed: () => Get.back(),
               icon: const Icon(Icons.arrow_back_ios)),
         ),
         body: Container(

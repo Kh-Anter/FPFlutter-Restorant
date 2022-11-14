@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/screens/authentication.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

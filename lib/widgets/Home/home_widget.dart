@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
-import 'package:restorant/screens/see_all.dart';
+import 'package:restorant/screens/search.dart';
+import 'package:restorant/screens/home/see_all.dart';
 import 'package:restorant/size_config.dart';
 
 class HomeWidget extends StatelessWidget {
@@ -61,9 +62,7 @@ class HomeWidget extends StatelessWidget {
                             borderSide: const BorderSide(
                                 width: 1, color: myBackgroundColor))),
                     onTap: () {
-                      setState(() {
-                        searchLabel = "";
-                      });
+                      Get.to(() => Search());
                     },
                     onEditingComplete: () {
                       setState(() => searchLabel = "Search");

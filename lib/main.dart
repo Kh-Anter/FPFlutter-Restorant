@@ -5,9 +5,9 @@ import 'package:restorant/binding/controller_binding.dart';
 import 'package:restorant/firebase_options.dart';
 import 'package:restorant/routes.dart';
 import 'package:restorant/screens/authentication.dart';
-import 'package:restorant/screens/cart.dart';
+import 'package:restorant/screens/home/cart.dart';
 import 'package:restorant/screens/checkout_delivery.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/screens/onboarding_Screen.dart';
 import 'package:restorant/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Foodie',
       theme: theme(),
-      home: //HomeScreen(),
+      home:
+          // OnboardingScreen(),
+          // HomeScreen(),
           FutureBuilder(
               future: isFirstUse(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
                 }
               }),
       getPages: routes,
-      initialBinding: controlbinding(),
+      // initialBinding: controlbinding(),
     );
   }
 

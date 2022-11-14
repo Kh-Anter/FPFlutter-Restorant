@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/model/user_model.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 
 class checkout extends StatelessWidget {
   static const routeName = "/checkout";
   maincontroller mcontroller = Get.put(maincontroller());
   bool value = true;
-  double deleveryprice=50;
+  double deleveryprice = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,14 @@ class checkout extends StatelessWidget {
         initState: (_) {},
         builder: (mcontroller) {
           mcontroller.getUserData();
-          var user=mcontroller.userDataModel;
+          var user = mcontroller.userDataModel;
           return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Colors.deepOrange,
               title: Text(
                 'chekout',
-                style: TextStyle(fontSize: 26,color: Colors.white),
+                style: TextStyle(fontSize: 26, color: Colors.white),
               ),
               centerTitle: true,
               leading: IconButton(
@@ -41,7 +41,8 @@ class checkout extends StatelessWidget {
                     children: [
                       Text(
                         'Personal Details',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -54,8 +55,8 @@ class checkout extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10),
                       child: Row(
                         children: [
                           Column(
@@ -66,20 +67,26 @@ class checkout extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 10,),
-                              Text(
-                                  'Email : ${user.email}',
-                                  style:
-                                  TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
-                                ),
                               SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                    'Phone Number : ${user.mobileNumber}',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
-                                  ),
+                                'Email : ${user.email}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'Phone Number : ${user.mobileNumber}',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -88,7 +95,9 @@ class checkout extends StatelessWidget {
                                   child: Text(
                                     'Address : New valley-Elkharga-basatin - naser yassin',
                                     style: TextStyle(
-                                        fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                                   )),
                             ],
                           )
@@ -96,13 +105,16 @@ class checkout extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
                         'Order Details',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -115,8 +127,8 @@ class checkout extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10),
                       child: Row(
                         children: [
                           Column(
@@ -127,23 +139,35 @@ class checkout extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 'Order Price : ${mcontroller.totalcardprice} \$',
-                                style:
-                                TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 'Delevry Fees : ${deleveryprice} \$',
-                                style:
-                                TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
-                                'Total  : ${mcontroller.totalcardprice+deleveryprice} \$',
-                                style:
-                                TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
+                                'Total  : ${mcontroller.totalcardprice + deleveryprice} \$',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           )
@@ -159,7 +183,8 @@ class checkout extends StatelessWidget {
                     children: [
                       Text(
                         'Payment Method',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -172,21 +197,22 @@ class checkout extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10),
                       child: Row(
                         children: [
                           Text(
                             'Pay on Cash When Deliver',
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ), //Text
                           SizedBox(width: 10), //SizedBox
                           Checkbox(
                             value: this.value,
                             onChanged: (bool value) {
-                                this.value = value;
+                              this.value = value;
                             },
-                          ),//Checkbox
+                          ), //Checkbox
                         ],
                       ),
                     ),
@@ -195,17 +221,17 @@ class checkout extends StatelessWidget {
                   Container(
                     height: 50,
                     decoration: BoxDecoration(
-                        color: myPrimaryColor,
+                      color: myPrimaryColor,
                     ),
                     child: Center(
                         child: Text(
-                          'Confirm Order',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2),
-                        )),
+                      'Confirm Order',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2),
+                    )),
                   ),
                 ],
               ),

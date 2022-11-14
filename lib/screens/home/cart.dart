@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/checkout.dart';
-import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/home/home.dart';
 
 class CartPage extends StatelessWidget {
   static const routeName = "/Cart";
@@ -25,7 +25,7 @@ class CartPage extends StatelessWidget {
               ),
               centerTitle: true,
               leading: IconButton(
-                  onPressed: () => Get.off(() => HomeScreen()),
+                  onPressed: () => Get.back(),
                   icon: Icon(Icons.arrow_back_ios)),
             ),
             body: cardcontroller.isload
@@ -172,7 +172,7 @@ class CartPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.off(() => checkout());
+                            Get.toNamed(checkout.routeName);
                           },
                           child: Container(
                               height: 50,
