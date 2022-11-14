@@ -84,11 +84,17 @@ class _FavoritePageState extends State<FavoritePage> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Text(
-                                          favcontroller.favoritelist[index].description,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16),
+                                        Container(
+                                          width: 200,
+                                          child: Text(
+                                            favcontroller.favoritelist[index].description,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            softWrap: false,
+                                          ),
                                         ),
                                       ],
                                     ),

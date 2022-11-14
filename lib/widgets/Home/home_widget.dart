@@ -4,6 +4,7 @@ import 'package:restorant/constants.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
+import 'package:restorant/screens/item_details.dart';
 import 'package:restorant/screens/see_all.dart';
 import 'package:restorant/size_config.dart';
 
@@ -176,7 +177,7 @@ class HomeWidget extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             children: <Widget>[
               Positioned(
-                top: 75,
+                top: 90,
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
@@ -201,8 +202,26 @@ class HomeWidget extends StatelessWidget {
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold)),
                         ),
-                        SizedBox(
-                          height: 10,
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  itemDetails(items[index]['name'],items[index]['price'].toString(),
+                                  items[index]['description'],items[index]['pic'])),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: 100,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: myPrimaryColor,
+                                borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Center(child: Text('View Details',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),)),
+                            ),
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
