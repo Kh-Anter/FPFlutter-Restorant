@@ -167,6 +167,12 @@ class HomeWidget extends StatelessWidget {
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                blurRadius: 4,
+                offset: Offset(4, 8),              )
+            ]
           ),
           child: Center(
               child: SizedBox(

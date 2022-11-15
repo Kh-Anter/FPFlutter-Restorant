@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/checkout.dart';
 import 'package:restorant/screens/home/home.dart';
-import 'package:restorant/screens/home.dart';
 import 'package:restorant/screens/item_details.dart';
 
 class CartPage extends StatefulWidget {
