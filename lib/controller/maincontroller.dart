@@ -18,7 +18,7 @@ class maincontroller extends GetxController{
       QuerySnapshot items= await FirebaseFirestore.instance.collection('users').doc(UID).collection('favorite').get();
       favoritelist.clear();
       for(var item in items.docs){
-        favoritelist.add(favoritemodel(item['name'], item['price'], item.id));
+        favoritelist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description'],item['pic']));
       }
       isload=false;
     } catch(e){
@@ -26,14 +26,18 @@ class maincontroller extends GetxController{
     }
   }
 
-  void setfavitem(String itemId){
-    FirebaseFirestore.instance.collection('users').doc(UID).collection('favorite').doc(itemId)
-        .set({
-      'name':'chease',
-      'price':'500',
+  void setfavitem(String name,String price,String description,String pic){
+    DocumentReference  documentReference=FirebaseFirestore.instance.collection('users').doc(UID).collection('favorite').doc();
+    documentReference.set({
+      'name':name,
+      'price':price,
+      'description':description,
+      'pic':pic,
+      'uid':documentReference.id
+
     }).then((value){
       getfavitem();
-      print('add fav');
+      print('Add from fav');
     }).catchError((error){
     });
   }
@@ -42,7 +46,7 @@ class maincontroller extends GetxController{
     FirebaseFirestore.instance.collection('users').doc(UID).collection('favorite').doc(itemId)
         .delete().then((value){
       getfavitem();
-      print('delete from fav');
+      print('delete From fav');
     }).catchError((error){
     });
   }
@@ -53,7 +57,7 @@ class maincontroller extends GetxController{
       cardlist.clear();
       totalcardprice=0;
       for(var item in items.docs){
-        cardlist.add(favoritemodel(item['name'], item['price'], item.id));
+        cardlist.add(favoritemodel(item['name'], item['price'], item['uid'],item['description'],item['pic']));
         totalcardprice=totalcardprice+double.parse(item['price']);
       }
       isload=false;
@@ -62,11 +66,15 @@ class maincontroller extends GetxController{
     }
   }
 
-  void setcarditem(String itemId){
-    FirebaseFirestore.instance.collection('users').doc(UID).collection('card').doc(itemId)
-        .set({
-      'name':'chease',
-      'price':'500',
+  void setcarditem(String name,String price,String description,String pic){
+    DocumentReference  documentReference=FirebaseFirestore.instance.collection('users').doc(UID).collection('card').doc();
+    documentReference.set({
+      'name':name,
+      'price':price,
+      'description':description,
+      'pic':pic,
+      'uid':documentReference.id
+
     }).then((value){
       getcarditem();
       print('Add from card');
@@ -78,9 +86,15 @@ class maincontroller extends GetxController{
     FirebaseFirestore.instance.collection('users').doc(UID).collection('card').doc(itemId)
         .delete().then((value){
       getcarditem();
+      totalcardprice=totalcardprice;
       print('delete From card');
     }).catchError((error){
     });
+  }
+
+  void increase(String price){
+    totalcardprice=totalcardprice+double.parse(price);
+    print(totalcardprice);
   }
 
   void getUserData(){

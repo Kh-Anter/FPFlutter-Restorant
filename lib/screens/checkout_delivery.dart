@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+
 class CheckDelivery extends StatefulWidget {
   const CheckDelivery({Key key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class _CheckDeliveryState extends State<CheckDelivery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: myBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.white70,
         title: Text(

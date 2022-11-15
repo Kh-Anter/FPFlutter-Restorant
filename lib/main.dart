@@ -8,6 +8,8 @@ import 'package:restorant/screens/authentication.dart';
 import 'package:restorant/screens/home/cart.dart';
 import 'package:restorant/screens/checkout_delivery.dart';
 import 'package:restorant/screens/home/home.dart';
+import 'package:restorant/screens/home.dart';
+import 'package:restorant/screens/item_details.dart';
 import 'package:restorant/screens/onboarding_Screen.dart';
 import 'package:restorant/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';

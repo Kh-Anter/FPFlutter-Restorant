@@ -18,22 +18,12 @@ class profile extends StatelessWidget {
           mcontroller.getUserData();
           var user = mcontroller.userDataModel;
           return Scaffold(
-            backgroundColor: Colors.white70,
-            appBar: AppBar(
-              backgroundColor: Colors.white70,
-              title: Text(
-                'My Profile',
-                style: TextStyle(fontSize: 26),
-              ),
-              centerTitle: true,
-              leading: IconButton(
-                  onPressed: () => Get.off(HomeScreen()),
-                  icon: Icon(Icons.arrow_back_ios)),
-            ),
+            backgroundColor: myBackgroundColor,
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
+                  Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -170,59 +160,7 @@ class profile extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'Pending reviews',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 25,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 70,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        children: [
-                          Text(
                             'Faq',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22),
-                          ),
-                          Spacer(),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 25,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 70,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Help',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
@@ -238,8 +176,26 @@ class profile extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  Container(
+                      height: 70,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Help',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            ),
+                          ],
+                        ),
+                      )),
+                  Spacer(),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(

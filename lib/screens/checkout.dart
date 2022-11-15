@@ -20,7 +20,7 @@ class checkout extends StatelessWidget {
           mcontroller.getUserData();
           var user = mcontroller.userDataModel;
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: myBackgroundColor,
             appBar: AppBar(
               backgroundColor: Colors.deepOrange,
               title: Text(
