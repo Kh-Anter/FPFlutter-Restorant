@@ -88,59 +88,6 @@ class checkout extends StatelessWidget {
                         ],
                       )),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 10),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Name : ${user.firstName} ${user.lastName}',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Email : ${user.email}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Phone Number : ${user.mobileNumber}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                                width: 350,
-                                child: Text(
-                                  'Address : New valley-Elkharga-basatin - naser yassin',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
