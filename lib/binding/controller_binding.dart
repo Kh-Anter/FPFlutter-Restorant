@@ -6,7 +6,7 @@ class controlbinding extends Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put<maincontroller>(maincontroller())..UID..getfavitem()..getUserData()..getcarditem();
+    Get.put<maincontroller>(maincontroller())..UID..getfavitem()..getUserData()..getcarditem()..getAddress();
   }
 
 }
