@@ -16,7 +16,6 @@ class Offers extends StatelessWidget {
     var _size = SizeConfig(context);
     return Scaffold(
       backgroundColor: myBackgroundColor,
-      appBar: myApp(),
       body: FutureBuilder(
         future: controller.getOffers(),
         initialData: _emptyWidget(_size),
@@ -31,18 +30,6 @@ class Offers extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-
-  Widget myApp() {
-    return AppBar(
-      title: const Text(
-        "Offers",
-        style: const TextStyle(fontSize: 26, letterSpacing: 1),
-      ),
-      backgroundColor: myBackgroundColor,
-      leading: IconButton(
-          onPressed: () => Get.back(), icon: const Icon(Icons.arrow_back_ios)),
     );
   }
 

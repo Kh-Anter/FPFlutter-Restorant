@@ -41,7 +41,7 @@ class itemDetails extends StatelessWidget {
                 )
               ],
               leading: IconButton(
-                  onPressed: () => Get.off(HomeScreen()),
+                  onPressed: () => Get.back(),
                   icon: Icon(Icons.arrow_back_ios)),
             ),
             body: SafeArea(

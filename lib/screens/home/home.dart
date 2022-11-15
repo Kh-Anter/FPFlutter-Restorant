@@ -6,6 +6,7 @@ import 'package:restorant/constants.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
 import 'package:restorant/controller/maincontroller.dart';
+import 'package:restorant/screens/Favorite.dart';
 import 'package:restorant/screens/aboutus.dart';
 import 'package:restorant/screens/home/cart.dart';
 import 'package:restorant/screens/offers.dart';
@@ -88,11 +89,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ListTile(
                     title: Row(
                   children: [
-                    const Icon(Icons.add_shopping_cart,
-                        color: Colors.white, size: 20),
+                    const Icon(Icons.timelapse, color: Colors.white, size: 20),
                     const SizedBox(width: 10),
                     TextButton(
-                      onPressed: () => Get.toNamed(CartPage.routeName),
+                      onPressed: () {},
                       child: const Text('Orders',
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                     )
@@ -106,12 +106,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ListTile(
                     title: Row(
                   children: [
-                    const Icon(Icons.local_offer_outlined,
+                    const Icon(Icons.table_restaurant,
                         color: Colors.white, size: 20),
                     const SizedBox(width: 10),
                     TextButton(
-                      onPressed: () => Get.toNamed(Offers.routeName),
-                      child: const Text('Offer and promo',
+                      onPressed: () {},
+                      child: const Text('Book a table',
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                     )
                   ],
@@ -126,12 +126,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     title: Row(
                   children: [
                     const Icon(Icons.privacy_tip_outlined,
-                        color: Colors.white, size: 18),
+                        color: Colors.white, size: 20),
                     const SizedBox(width: 10),
                     TextButton(
                       onPressed: () => Get.to(() => Aboutus()),
                       child: const Text('About us',
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
                     )
                   ],
                 )),
@@ -144,9 +144,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           onPressed: () {},
                           child: const Text('Sign-out',
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 20))),
+                                  color: Colors.white, fontSize: 18))),
                       const Icon(Icons.arrow_forward_sharp,
-                          color: Colors.white, size: 18),
+                          color: Colors.white, size: 20),
                     ],
                   ),
                 ) //),
@@ -168,73 +168,65 @@ class _MainHomeState extends State<MainHome> {
   final FeatchController controller = Get.put(FeatchController());
   final HomeController home_ctl = Get.put(HomeController());
   // final _drawerController = ZoomDrawerController();
+  String appbar_title = "";
   String searchLabel = "Search";
+  int currentIndex = 0;
+  Widget body = HomeWidget();
 
   Widget build(BuildContext context) {
     var _size = SizeConfig(context);
     return Scaffold(
         backgroundColor: myBackgroundColor,
         appBar: AppBar(
-          backgroundColor: myBackgroundColor,
-          actions: [
-            Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: IconButton(
-                    onPressed: () => Get.toNamed(CartPage.routeName),
-                    icon: const Icon(Icons.shopping_cart),
-                    color: mySecondTextColor))
+            backgroundColor: myBackgroundColor, title: Text(appbar_title)),
+        body: body, //_homeBody(),
+        bottomNavigationBar: //Obx(() =>
+            BottomNavigationBar(
+          backgroundColor: Colors.white,
+          selectedItemColor: myPrimaryColor,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex, //home_ctl.bottomNavIndex.value,
+          onTap: (index) {
+            setState(() {
+              _setboodyAndTitle(index);
+              currentIndex = index;
+              //  home_ctl.changeIndex(index);
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.local_offer), label: ""),
           ],
-        ),
-        body: Obx(() => _homeBody(home_ctl.bottomNavIndex.value)),
-        bottomNavigationBar: Obx(() => BottomNavigationBar(
-              backgroundColor: Colors.white,
-              selectedItemColor: myPrimaryColor,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: home_ctl.bottomNavIndex.value,
-              onTap: (index) {
-                home_ctl.changeIndex(index);
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.timelapse),
-                  label: "",
-                ),
-              ],
-            )));
+        ));
+    //);
   }
 
-  _homeBody(bottomNavIndex) {
+  _setboodyAndTitle(bottomNavIndex) {
     switch (bottomNavIndex) {
       case 0:
         {
-          return HomeWidget();
+          appbar_title = "";
+          body = HomeWidget();
         }
         break;
       case 1:
         {
-          return Center(child: Text("Favorite"));
+          appbar_title = "Favorite";
+          body = FavoritePage();
         }
         break;
       case 2:
         {
-          return Center(child: Text("Profile"));
+          appbar_title = "Cart";
+          body = CartPage();
         }
         break;
       case 3:
         {
-          return Center(child: Text("lll"));
+          appbar_title = "Offers";
+          body = Offers();
         }
         break;
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restorant/constants.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/checkout.dart';
 import 'package:restorant/screens/home/home.dart';
@@ -25,18 +26,7 @@ class _CartPageState extends State<CartPage> {
         builder: (cardcontroller) {
           cardcontroller.getcarditem();
           return Scaffold(
-            backgroundColor: Colors.white70,
-            appBar: AppBar(
-              backgroundColor: Colors.white70,
-              title: Text(
-                'Cart',
-                style: TextStyle(fontSize: 26, letterSpacing: 1),
-              ),
-              centerTitle: true,
-              leading: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: Icon(Icons.arrow_back_ios)),
-            ),
+            backgroundColor: myBackgroundColor,
             body: cardcontroller.isload
                 ? Center(child: CircularProgressIndicator())
                 : Padding(
