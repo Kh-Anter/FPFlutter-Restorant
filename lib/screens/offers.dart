@@ -140,7 +140,7 @@ class Offers extends StatelessWidget {
           alignment: Alignment.center,
           width: size.getWidth / 1.5,
           child: const Text(
-            "Bella dose’t have any offers yet please check again.",
+            "Foode dose’t have any offers yet please check again.",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, color: mySecondTextColor),
           ),

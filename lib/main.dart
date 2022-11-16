@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:restorant/firebase_options.dart';
 import 'package:restorant/routes.dart';
 import 'package:restorant/screens/authentication.dart';
+import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/screens/onboarding_Screen.dart';
+import 'package:restorant/screens/orders.dart';
 import 'package:restorant/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Foodie',
       theme: theme(),
       home:
+          //Orders(),
           // OnboardingScreen(),
           // HomeScreen(),
           FutureBuilder(
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
                 } else if (snapshot.data) {
                   return OnboardingScreen();
                 } else if (!snapshot.data) {
-                  return Authentication();
+                  return HomeScreen();
                 } else {
                   return null;
                 }

@@ -46,6 +46,21 @@ class Auth {
     }
   }
 
+  Future<void> logout() async {
+    var auth = FirebaseAuth.instance;
+    var userProvider = auth.currentUser.providerData[0].providerId;
+    if (userProvider == "google.com") {
+      GoogleSignIn().signOut();
+      auth.signOut();
+    } else if (userProvider == "facebook.com") {
+      FacebookAuth.i.logOut();
+      FacebookAuth.instance.logOut();
+      auth.signOut();
+    } else {
+      await auth.signOut();
+    }
+  }
+
   Future<void> signInWithGoogle(context) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     try {

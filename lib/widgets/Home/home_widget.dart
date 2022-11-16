@@ -166,14 +166,14 @@ class HomeWidget extends StatelessWidget {
           width: 200,
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                blurRadius: 4,
-                offset: Offset(4, 8),              )
-            ]
-          ),
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  blurRadius: 4,
+                  offset: Offset(4, 8),
+                )
+              ]),
           child: Center(
               child: SizedBox(
                   child: Center(
@@ -263,7 +263,8 @@ class HomeWidget extends StatelessWidget {
                                     items[index]['pic'],
                                   );
                                 },
-                                icon: Icon(Icons.add_shopping_cart))
+                                icon: Icon(Icons.add_shopping_cart,
+                                    color: Colors.grey))
                           ],
                         )
                       ]),

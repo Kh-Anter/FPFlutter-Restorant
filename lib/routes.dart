@@ -9,6 +9,7 @@ import 'package:restorant/screens/home/cart.dart';
 import 'package:restorant/screens/home/home.dart';
 import 'package:restorant/screens/offers.dart';
 import 'package:restorant/screens/onboarding_Screen.dart';
+import 'package:restorant/screens/orders.dart';
 import 'package:restorant/screens/profile.dart';
 import 'package:restorant/screens/home/see_all.dart';
 
@@ -23,4 +24,5 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: Aboutus.routeName, page: () => Aboutus()),
   GetPage(name: checkout.routeName, page: () => checkout()),
   GetPage(name: FavoritePage.routeName, page: () => FavoritePage()),
+  GetPage(name: Orders.routeName, page: () => Orders()),
 ];

@@ -1,15 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
+import 'package:restorant/getx/auth.dart';
 import 'package:restorant/getx/featchData.dart';
 import 'package:restorant/getx/home_ctl.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/screens/Favorite.dart';
 import 'package:restorant/screens/aboutus.dart';
+import 'package:restorant/screens/authentication.dart';
 import 'package:restorant/screens/home/cart.dart';
 import 'package:restorant/screens/offers.dart';
+import 'package:restorant/screens/orders.dart';
 import 'package:restorant/screens/profile.dart';
 import 'package:restorant/screens/home/see_all.dart';
 import 'package:restorant/size_config.dart';
@@ -24,6 +28,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final ZoomDrawerController z = ZoomDrawerController();
+  final Auth controller = Get.put(Auth());
   final Home = HomeScreen();
 
   @override
@@ -92,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     const Icon(Icons.timelapse, color: Colors.white, size: 20),
                     const SizedBox(width: 10),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(Orders.routeName),
                       child: const Text('Orders',
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                     )
@@ -136,20 +141,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ],
                 )),
                 Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: Row(
-                    children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text('Sign-out',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 18))),
-                      const Icon(Icons.arrow_forward_sharp,
-                          color: Colors.white, size: 20),
-                    ],
-                  ),
-                ) //),
+                FirebaseAuth.instance.currentUser == null
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                            title: Row(
+                          children: [
+                            const Icon(Icons.login,
+                                color: Colors.white, size: 20),
+                            const SizedBox(width: 10),
+                            TextButton(
+                              onPressed: () => Get.to(() => Authentication()),
+                              child: const Text('Resgister',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18)),
+                            )
+                          ],
+                        )),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: Row(
+                          children: [
+                            TextButton(
+                                onPressed: () async {
+                                  await controller.logout();
+                                  setState(() {});
+                                },
+                                child: const Text('Sign-out',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 18))),
+                            const Icon(Icons.arrow_forward_sharp,
+                                color: Colors.white, size: 20),
+                          ],
+                        ),
+                      ) //),
               ],
             )));
   }
