@@ -111,7 +111,17 @@ class Auth {
       'email': email,
       'mobileNumber': mobNumber,
       'role': 0,
-    }).then((value) => print("----------User Added------------"));
+    }).then((value){
+      DocumentReference  documentReference=FirebaseFirestore.instance.collection('users').doc(uid).collection('adress').doc();
+      documentReference.set({
+        'address':"relpace with your adress",
+        'uid':documentReference.id
+      }).then((value){
+      }).catchError((error){
+      });
+    }
+
+    );
   }
 
   mySnackBar(BuildContext ctx, String text) {

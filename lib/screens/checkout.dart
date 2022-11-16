@@ -1,18 +1,29 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restorant/constants.dart';
 import 'package:restorant/controller/maincontroller.dart';
 import 'package:restorant/model/user_model.dart';
 import 'package:restorant/screens/home/home.dart';
+import 'package:restorant/size_config.dart';
 
-class checkout extends StatelessWidget {
+class checkout extends StatefulWidget {
   static const routeName = "/checkout";
-  maincontroller mcontroller = Get.put(maincontroller());
-  bool value = true;
-  double deleveryprice = 50;
 
   @override
+  State<checkout> createState() => _checkoutState();
+}
+
+class _checkoutState extends State<checkout> {
+  maincontroller mcontroller = Get.put(maincontroller());
+
+  bool value = true;
+  double deleveryprice = 50;
+  bool pickup =true;
+  @override
   Widget build(BuildContext context) {
+    var _size = SizeConfig(context);
     return GetBuilder<maincontroller>(
         init: mcontroller,
         initState: (_) {},
@@ -22,10 +33,10 @@ class checkout extends StatelessWidget {
           return Scaffold(
             backgroundColor: myBackgroundColor,
             appBar: AppBar(
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: myBackgroundColor,
               title: Text(
                 'chekout',
-                style: TextStyle(fontSize: 26, color: Colors.white),
+                style: TextStyle(fontSize: 24,),
               ),
               centerTitle: true,
               leading: IconButton(
@@ -35,269 +46,142 @@ class checkout extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Personal Details',
+                        'Address Details',
                         style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Name : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${user.firstName} ${user.lastName}',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                  SizedBox(height: 10,),
+                  Container(
+                    width: _size.getWidth-20,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Email : ',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${user.firstName} ${user.lastName}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          Text(
-                            '${user.email}',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Divider(color: Colors.grey[700],thickness: 2),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${mcontroller.addressList.last.itemid}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Divider(color: Colors.grey[700],thickness: 2),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '${user.mobileNumber}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+
                         ],
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 10),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Name : ${user.firstName} ${user.lastName}',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Email : ${user.email}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Phone Number : ${user.mobileNumber}',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                                width: 350,
-                                child: Text(
-                                  'Address : New valley-Elkharga-basatin - naser yassin',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ],
-                        )
-                      ],
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Delivery Method.',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Mobile Number : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${user.mobileNumber}',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                  SizedBox(height: 10,),
+                  Container(
+                    width: _size.getWidth-20,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Address : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Container(
-                          width: 250,
-                          child: Text(
-                            'New valley-Elkharga-basatin - naser yassin',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: false,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListTile(
+                            title: const Text('Door Delivery',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                            leading: Radio<bool>(
+                              value: false,
+                              groupValue: pickup,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  pickup = value;
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Order Details',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue),
+                          ListTile(
+                            title: const Text('Pick Up',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                            leading: Radio<bool>(
+                              value: true,
+                              groupValue: pickup,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  pickup = value;
+                                });
+                              },
+                            ),
+                          ),
+
+                        ],
                       ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Number Of Item : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${mcontroller.cardlist.length}',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Order Price:  ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${mcontroller.totalcardprice} \$',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Delevry Fees : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${deleveryprice} \$',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Total : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          '${mcontroller.totalcardprice + deleveryprice} \$',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Payment Method',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue),
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Payment Method.',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -330,20 +214,42 @@ class checkout extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: myPrimaryColor,
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Total',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        Spacer(),
+                        Text(
+                          '${pickup?mcontroller.totalcardprice:mcontroller.totalcardprice + deleveryprice} \$',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ],
                     ),
-                    child: Center(
-                        child: Text(
-                      'Confirm Order',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2),
-                    )),
+                  ),
+
+                  GestureDetector(
+                    onTap: (){
+                      mcontroller.setorder(mcontroller.addressList.last.itemid, mcontroller.totalcardprice.toString(),'first','123');
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: myPrimaryColor,
+                      ),
+                      child: Center(
+                          child: Text(
+                            'Confirm Order',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2),
+                          )),
+                    ),
                   ),
                 ],
               ),

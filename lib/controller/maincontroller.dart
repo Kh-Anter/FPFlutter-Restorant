@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:restorant/model/adressmodel.dart';
 import 'package:restorant/model/favorite_model.dart';
 import 'package:restorant/model/user_model.dart';
 
@@ -8,6 +9,7 @@ class maincontroller extends GetxController {
   var isload = false;
   var favoritelist = <favoritemodel>[];
   var cardlist = <favoritemodel>[];
+  var addressList = <addressmodel>[];
 
   UserDataModel userDataModel;
   double totalcardprice = 0;
@@ -116,6 +118,59 @@ class maincontroller extends GetxController {
       getcarditem();
       totalcardprice = totalcardprice;
       print('delete From card');
+    }).catchError((error) {});
+  }
+
+  Future<void> getAddress() async {
+    try {
+      final UID = FirebaseAuth.instance.currentUser.uid;
+      QuerySnapshot items = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(UID)
+          .collection('adress')
+          .get();
+      addressList.clear();
+      for (var item in items.docs) {
+        addressList.add(addressmodel(
+          item['address'],
+          item['uid'],
+        ));
+      }
+      print('done');
+      print(addressList.last.itemid);
+    } catch (e) {
+      Get.snackbar('Error', '${e.toString()}');
+    }
+  }
+
+  void setadress(String address) {
+    final UID = FirebaseAuth.instance.currentUser.uid;
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('users')
+        .doc(UID)
+        .collection('adress')
+        .doc();
+    documentReference
+        .set({'address': address, 'uid': documentReference.id}).then((value) {
+      getcarditem();
+      print('Add New Adress');
+    }).catchError((error) {});
+  }
+
+  void setorder(String address, String total, String name, String itemid) {
+    final UID = FirebaseAuth.instance.currentUser.uid;
+    print('aaaaa');
+    FirebaseFirestore.instance.collection('orders').doc().set({
+      'address': address,
+      'date': DateTime.now(),
+      'isDeliverd': false,
+      'total': total,
+      'uid': UID,
+      'item': [
+        {'name': 'i.name', 'count': '1', 'itemid': 'i.itemid'}
+      ]
+    }).then((value) {
+      print('Add New order');
     }).catchError((error) {});
   }
 
