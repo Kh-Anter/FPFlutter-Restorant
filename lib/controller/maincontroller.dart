@@ -121,6 +121,26 @@ class maincontroller extends GetxController{
     });
   }
 
+  void setorder(String address,String total,String name,String itemid){
+    print('aaaaa');
+    FirebaseFirestore.instance.collection('orders').doc()
+    .set({
+      'address':address,
+      'date':DateTime.now(),
+      'isDeliverd':false,
+      'total':total,
+      'uid':UID,
+      'item':[{
+          'name':'i.name',
+          'count':'1',
+          'itemid':'i.itemid'
+      }]
+    }).then((value){
+      print('Add New order');
+    }).catchError((error){
+    });
+  }
+
   void increase(String price){
     totalcardprice=totalcardprice+double.parse(price);
     print(totalcardprice);
