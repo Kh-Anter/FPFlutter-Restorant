@@ -32,8 +32,7 @@ class _UpcommingOrdersState extends State<UpcommingOrders> {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && (snapshot.data.length != 0)) {
             return buildBody(snapshot.data, _size, controller.role);
-          } else if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data.length == 0) {
+          } else if (snapshot.connectionState == ConnectionState.done) {
             return emptyOrders(_size);
           } else {
             return Center(
@@ -116,6 +115,25 @@ class _UpcommingOrdersState extends State<UpcommingOrders> {
                         color: myIconRedColor)),
               ],
             ),
+            if (role == 1)
+              Column(
+                children: [
+                  Divider(thickness: 1),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Address",
+                          style: TextStyle(
+                              fontSize: 16, color: mySecondTextColor)),
+                      Text(result[i]["address"].toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: myIconRedColor)),
+                    ],
+                  ),
+                ],
+              ),
             Container(
                 margin: const EdgeInsets.only(bottom: 20, top: 20),
                 width: _size.getWidth - 70,
@@ -127,10 +145,17 @@ class _UpcommingOrdersState extends State<UpcommingOrders> {
                     onPressed: () => showDialog(
                         context: context,
                         builder: (ctx) => myAlertDialog(role == 0
-                            ? controller
-                                .cancelOrder(result[i]["orderId"].toString())
-                            : controller
-                                .orderSent(result[i]["orderId"].toString()))),
+                            ? () {
+                                controller.cancelOrder(
+                                    result[i]["orderId"].toString());
+                                Get.back();
+                              }
+                            : () {
+                                controller
+                                    .orderSent(result[i]["orderId"].toString());
+                                Get.back();
+                                setState(() {});
+                              })),
                     child: Text(role == 0 ? "Cancel order" : "Order Sent",
                         style: TextStyle(fontSize: 18))))
           ]),
@@ -141,14 +166,18 @@ class _UpcommingOrdersState extends State<UpcommingOrders> {
   }
 
   Widget myAlertDialog(onpress_continue) {
+    String txt = "";
+    if (controller.role == 0)
+      txt = "Are you sure , you want to cancel order ?";
+    else
+      txt = "Are you sure , the order sent ?";
     return AlertDialog(
-      //title: Text("AlertDialog"),
-      content: Text("Are you sure , you want to cancel order ?"),
+      content: Text(txt),
       actions: [
         TextButton(child: Text("Cancel"), onPressed: () => Get.back()),
         TextButton(
           child: Text("Continue"),
-          onPressed: () => onpress_continue,
+          onPressed: onpress_continue,
         )
       ],
     );

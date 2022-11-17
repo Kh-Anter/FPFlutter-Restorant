@@ -20,7 +20,7 @@ class _checkoutState extends State<checkout> {
 
   bool value = true;
   double deleveryprice = 50;
-  bool pickup =true;
+  bool pickup = true;
   @override
   Widget build(BuildContext context) {
     var _size = SizeConfig(context);
@@ -36,7 +36,9 @@ class _checkoutState extends State<checkout> {
               backgroundColor: myBackgroundColor,
               title: Text(
                 'chekout',
-                style: TextStyle(fontSize: 24,),
+                style: TextStyle(
+                  fontSize: 24,
+                ),
               ),
               centerTitle: true,
               leading: IconButton(
@@ -60,9 +62,11 @@ class _checkoutState extends State<checkout> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
-                    width: _size.getWidth-20,
+                    width: _size.getWidth - 20,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -82,20 +86,24 @@ class _checkoutState extends State<checkout> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Divider(color: Colors.grey[700],thickness: 2),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child:
+                                Divider(color: Colors.grey[700], thickness: 2),
                           ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: Text(
+                          //     '${mcontroller.addressList.last.itemid}',
+                          //     style: TextStyle(
+                          //         fontSize: 18, fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '${mcontroller.addressList.last.itemid}',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Divider(color: Colors.grey[700],thickness: 2),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child:
+                                Divider(color: Colors.grey[700], thickness: 2),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -105,12 +113,13 @@ class _checkoutState extends State<checkout> {
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ),
-
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -123,9 +132,11 @@ class _checkoutState extends State<checkout> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
-                    width: _size.getWidth-20,
+                    width: _size.getWidth - 20,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -137,7 +148,11 @@ class _checkoutState extends State<checkout> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListTile(
-                            title: const Text('Door Delivery',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                            title: const Text(
+                              'Door Delivery',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
                             leading: Radio<bool>(
                               value: false,
                               groupValue: pickup,
@@ -149,7 +164,11 @@ class _checkoutState extends State<checkout> {
                             ),
                           ),
                           ListTile(
-                            title: const Text('Pick Up',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                            title: const Text(
+                              'Pick Up',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
                             leading: Radio<bool>(
                               value: true,
                               groupValue: pickup,
@@ -160,7 +179,6 @@ class _checkoutState extends State<checkout> {
                               },
                             ),
                           ),
-
                         ],
                       ),
                     ),
@@ -220,20 +238,26 @@ class _checkoutState extends State<checkout> {
                       children: [
                         Text(
                           'Total',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         Spacer(),
                         Text(
-                          '${pickup?mcontroller.totalcardprice:mcontroller.totalcardprice + deleveryprice} \$',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          '${pickup ? mcontroller.totalcardprice : mcontroller.totalcardprice + deleveryprice} \$',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ],
                     ),
                   ),
-
                   GestureDetector(
-                    onTap: (){
-                      mcontroller.setorder(mcontroller.addressList.last.itemid, mcontroller.totalcardprice.toString(),'first','123');
+                    onTap: () {
+                      mcontroller.setorder(
+                          " mcontroller.addressList.last.itemid,",
+                          mcontroller.totalcardprice.toString(),
+                          'first',
+                          '123');
+                      Get.offAndToNamed(HomeScreen.routeName);
                     },
                     child: Container(
                       height: 50,
@@ -242,13 +266,13 @@ class _checkoutState extends State<checkout> {
                       ),
                       child: Center(
                           child: Text(
-                            'Confirm Order',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2),
-                          )),
+                        'Confirm Order',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2),
+                      )),
                     ),
                   ),
                 ],

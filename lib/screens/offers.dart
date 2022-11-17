@@ -16,7 +16,6 @@ class Offers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var _size = SizeConfig(context);
     return Scaffold(
       backgroundColor: myBackgroundColor,
@@ -30,14 +29,14 @@ class Offers extends StatelessWidget {
               controller.offers == []) {
             return _emptyWidget(_size);
           } else {
-            return _offers(controller.offers, _size,context);
+            return _offers(controller.offers, _size, context);
           }
         },
       ),
     );
   }
 
-  Widget _offers(items, size,context) {
+  Widget _offers(items, size, context) {
     return Container(
       color: myBackgroundColor,
       child: StaggeredGridView.countBuilder(
@@ -60,7 +59,7 @@ class Offers extends StatelessWidget {
                     Positioned(
                       top: 75,
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -113,7 +112,8 @@ class Offers extends StatelessWidget {
                                         backgroundColor: myPrimaryColor,
                                         fontWeight: FontWeight.bold)),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     IconButton(
                                         onPressed: () {
@@ -151,10 +151,10 @@ class Offers extends StatelessWidget {
                       top: 10,
                       child: Container(
                         child: CircleAvatar(
-                          radius: size.getProportionateScreenWidth(65.0),
-                          backgroundImage:
-                              AssetImage('assets/images/home/meal.jpg'),
-                        ),
+                            radius: size.getProportionateScreenWidth(65.0),
+                            backgroundImage: NetworkImage(items[i]["pic"])
+                            //AssetImage('assets/images/home/meal.jpg'),
+                            ),
                       ),
                     ),
                   ],

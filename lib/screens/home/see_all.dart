@@ -101,8 +101,7 @@ class SeeAll extends StatelessWidget {
                           child: Container(
                             child: CircleAvatar(
                               radius: _size.getProportionateScreenWidth(65.0),
-                              backgroundImage:
-                                  AssetImage('assets/images/home/meal.jpg'),
+                              backgroundImage: NetworkImage(items[i]["pic"]),
                             ),
                           ),
                         ),

@@ -7,6 +7,10 @@ class controlbinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     // final UID = FirebaseAuth.instance.currentUser.uid;
-    // Get.put<maincontroller>(maincontroller())..UID..getfavitem()..getUserData()..getcarditem()..getAddress();
+    Get.put<maincontroller>(maincontroller())
+      ..getfavitem()
+      ..getUserData()
+      ..getcarditem()
+      ..getAddress();
   }
 }

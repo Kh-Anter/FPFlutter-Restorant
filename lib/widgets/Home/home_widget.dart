@@ -278,7 +278,9 @@ class HomeWidget extends StatelessWidget {
                 child: Container(
                   child: CircleAvatar(
                     radius: 75,
-                    backgroundImage: AssetImage('assets/images/home/meal.jpg'),
+
+                    backgroundImage: NetworkImage(items[index][
+                        "pic"]), //Image.network(items[index]["pic"]),  // AssetImage('assets/images/home/meal.jpg'),
                   ),
                 ),
               ),

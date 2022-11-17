@@ -64,7 +64,7 @@ class _HistoryOrdersState extends State<HistoryOrders> {
                               color: myIconRedColor, size: 10),
                           const SizedBox(width: 10),
                           Text(
-                            result[i]["items"][r_i]["itemID"],
+                            result[i]["items"][r_i]["name"],
                             style: const TextStyle(
                                 fontSize: 18, color: mySecondTextColor),
                           ),
@@ -85,12 +85,12 @@ class _HistoryOrdersState extends State<HistoryOrders> {
                 const Text("Date",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: mySecondTextColor)),
                 Text(result[i]["date"].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: myIconRedColor)),
               ],
             ),
@@ -100,12 +100,12 @@ class _HistoryOrdersState extends State<HistoryOrders> {
                 const Text("Total",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: mySecondTextColor)),
                 Text(result[i]["total"].toString() + " LE ",
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
                         color: myIconRedColor)),
               ],
             ),
@@ -121,7 +121,26 @@ class _HistoryOrdersState extends State<HistoryOrders> {
                                   borderRadius: BorderRadius.circular(30)))),
                       onPressed: () => showDialog(
                           context: context, builder: (ctx) => myAlertDialog()),
-                      child: Text("Re-Order", style: TextStyle(fontSize: 18))))
+                      child: Text("Re-Order", style: TextStyle(fontSize: 18)))),
+            if (role == 1)
+              Column(
+                children: [
+                  Divider(thickness: 1),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Address",
+                          style: TextStyle(
+                              fontSize: 16, color: mySecondTextColor)),
+                      Text(result[i]["address"].toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: myIconRedColor)),
+                    ],
+                  ),
+                ],
+              ),
           ]),
         );
       },

@@ -23,10 +23,12 @@ class maincontroller extends GetxController {
           .collection('favorite')
           .get();
       favoritelist.clear();
+      print("dsfsdfdsfdsfds");
       for (var item in items.docs) {
         favoritelist.add(favoritemodel(item['name'], item['price'], item['uid'],
             item['description'], item['pic']));
       }
+      print("dsfsdfdsfdsfds--1");
       isload = false;
     } catch (e) {
       Get.snackbar('Error', '${e.toString()}');

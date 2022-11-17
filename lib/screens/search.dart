@@ -83,11 +83,12 @@ class _SearchState extends State<Search> {
                               top: 10,
                               child: Container(
                                 child: CircleAvatar(
-                                  radius:
-                                      _size.getProportionateScreenWidth(65.0),
-                                  backgroundImage:
-                                      AssetImage('assets/images/home/meal.jpg'),
-                                ),
+                                    radius:
+                                        _size.getProportionateScreenWidth(65.0),
+                                    backgroundImage:
+                                        NetworkImage(items[i]["pic"])
+                                    //   AssetImage('assets/images/home/meal.jpg'),
+                                    ),
                               ),
                             ),
                           ],

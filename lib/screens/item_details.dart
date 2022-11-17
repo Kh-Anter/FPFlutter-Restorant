@@ -56,8 +56,8 @@ class itemDetails extends StatelessWidget {
                     Container(
                       child: CircleAvatar(
                         radius: 120,
-                        backgroundImage:
-                            AssetImage('assets/images/home/meal.jpg'),
+                        backgroundImage: NetworkImage(pic),
+                        // AssetImage('assets/images/home/meal.jpg'),
                       ),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),

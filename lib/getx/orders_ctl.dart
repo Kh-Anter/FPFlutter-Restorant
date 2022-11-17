@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 
 class OrdersCtl extends GetxController {
@@ -18,33 +19,47 @@ class OrdersCtl extends GetxController {
     await getUserRole();
 
     var uid = FirebaseAuth.instance.currentUser.uid;
-    var listOfOrders = await orders
-        .where('uid', isEqualTo: uid)
-        // .where('isDeliverd', isEqualTo: isDeliverd ? true : false)
-        .get();
+    var listOfOrders = role == 0
+        ? await orders
+            .where('uid', isEqualTo: uid)
+            .where('isDeliverd', isEqualTo: isDeliverd)
+            .get()
+        : await orders
+            .where('did', isEqualTo: uid)
+            .where('isDeliverd', isEqualTo: isDeliverd)
+            .get();
+
     List<Map<String, dynamic>> result = [];
-    print(listOfOrders.docs);
+
     for (int i = 0; i < listOfOrders.docs.length; i++) {
+      DateTime tsdate = DateTime.fromMillisecondsSinceEpoch(
+          listOfOrders.docs[i].get("date").seconds * 1000);
+      var date = DateFormat('yyyy-MM-dd').format(tsdate);
       result.add(
         {
           "address": listOfOrders.docs[i].get("address").toString(),
-          "date": listOfOrders.docs[i].get("date").toString(),
-          "items": listOfOrders.docs[i].get("items"),
+          "date": date,
+          "items": listOfOrders.docs[i].get("item"),
           "total": listOfOrders.docs[i].get("total"),
           "orderId": listOfOrders.docs[i].id
         },
       );
     }
-    // print(listOfOrders.docs[0]);
-    print(uid);
-    print(isDeliverd);
     print(result);
     return result;
   }
 
   cancelOrder(orderId) {
     orders.doc(orderId).delete();
+    print("here cancel order");
+    print(orderId);
   }
 
-  orderSent(orderId) {}
+  orderSent(orderId) async {
+    print("heeere order send");
+    print(orderId);
+    var uid = FirebaseAuth.instance.currentUser.uid;
+    await orders.doc(orderId).update({"isDeliverd": true});
+    //.where('orderid', isEqualTo: uid);
+  }
 }
